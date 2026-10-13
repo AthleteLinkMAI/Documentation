@@ -13,10 +13,10 @@ deploy-job:
   stage: deploy
   extends: .deploy_template
   script:
-    - scp -i ~/.ssh/id_ed25519 docker-compose.yaml root@$SSH_REMOTE_HOST:/root/projects/atheletelink/docker-compose.yaml
+    - scp -i ~/.ssh/id_ed25519 docker-compose.yaml root@$SSH_REMOTE_HOST:/root/projects/athletelink/docker-compose.yaml
     - |
       ssh -i ~/.ssh/id_ed25519 root@$SSH_REMOTE_HOST "
-        cd /root/projects/atheletelink &&
+        cd /root/projects/athletelink &&
         export JWT_SECRET='$JWT_SECRET' &&
         export EMAIL_ADDRESS='$EMAIL_ADDRESS' &&
         export EMAIL_PASSWORD='$EMAIL_PASSWORD' &&
