@@ -79,6 +79,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://game-db:5432/game_db
       DB_USER: ${GAME_DB_USER:-postgres}
       DB_PASSWORD: ${GAME_DB_PASSWORD:-admin}
+      KAFKA_BOOTSTRAP_SERVERS: kafka:19092
     depends_on:
       game-db:
         condition: service_healthy
@@ -179,7 +180,8 @@ services:
       - |
         /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:19092 --create --if-not-exists --topic user.changes --partitions 3 --replication-factor 1
         /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:19092 --create --if-not-exists --topic notification.messages.requested --partitions 3 --replication-factor 1
-        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:19092 --create --if-not-exists --topic game.commands --partitions 3 --replication-factor 1
+        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:19092 --create --if-not-exists --topic game.submit.rounds --partitions 3 --replication-factor 1
+        /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:19092 --create --if-not-exists --topic game.close.requests --partitions 3 --replication-factor 1
         /opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:19092 --create --if-not-exists --topic game.replies --partitions 3 --replication-factor 1
     depends_on:
       kafka:
